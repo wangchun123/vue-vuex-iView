@@ -5,7 +5,15 @@
       <i-col :span="spanLeft" class="layout-menu-left">
         <Menu active-name="1" theme="dark" width="auto">
           <div class="layout-logo-left"></div>
-          <router-link to="/form">
+
+          <router-link v-for="item in menuData" :key="item.name" :to="item.url">
+            <Menu-item :name="item.name">
+              <Icon type="ios-keypad" :size="iconSize"></Icon>
+              <span class="layout-text">{{item.title}}</span>
+            </Menu-item>
+          </router-link>
+
+          <!-- <router-link to="/form">
             <Menu-item name="1">
               <Icon type="ios-navigate" :size="iconSize"></Icon>
               <span class="layout-text">form</span>
@@ -19,21 +27,19 @@
             </Menu-item>
           </router-link>
 
-          <router-link to='/testVuex'>
+          <router-link to="/testVuex">
             <Menu-item name="3">
               <Icon type="ios-analytics" :size="iconSize"></Icon>
               <span class="layout-text">vuex</span>
             </Menu-item>
           </router-link>
 
-
-          <router-link to='/vueOrder'>
+          <router-link to="/vueOrder">
             <Menu-item name="4">
               <Icon type="ios-analytics" :size="iconSize"></Icon>
               <span class="layout-text">vueOrder</span>
             </Menu-item>
-          </router-link>
-
+          </router-link>-->
         </Menu>
       </i-col>
       <i-col :span="spanRight">
@@ -64,13 +70,20 @@ export default {
   data() {
     return {
       spanLeft: 5,
-      spanRight: 19
+      spanRight: 19,
+      menuData: [
+        { title: 'form', url: '/form', name: '1' },
+        { title: '首页', url: '/index', name: '2' },
+        { title: 'vuex', url: '/testVuex', name: '3' },
+        { title: 'vueOrder', url: '/vueOrder', name: '4' },
+        { title: 'table', url: '/table', name: '5' },
+      ],
     };
   },
   computed: {
     iconSize() {
       return this.spanLeft === 5 ? 14 : 24;
-    }
+    },
   },
   methods: {
     toggleClick() {
@@ -81,8 +94,8 @@ export default {
         this.spanLeft = 5;
         this.spanRight = 19;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

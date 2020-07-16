@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld';
 import Forms from '@/pages/Form/form';
 import TestVuex from '../pages/testVuex/index';
 import VueOrder from '@/pages/vueOrder/index';
+import Table from '@/pages/table/index';
 
 Vue.use(Router);
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/vueOrder',
       name: 'vueOrder',
       component: VueOrder,
+    },
+    {
+      path: '/table',
+      name: 'Table',
+      component: Table,
     },
   ],
 });
