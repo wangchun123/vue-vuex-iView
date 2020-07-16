@@ -1,47 +1,208 @@
 <template>
-  <i-table :columns="columns1" :data="data1"></i-table>
+  <div>
+    <Table :data="tableData1" :columns="tableColumns1" stripe></Table>
+    <div style="margin: 10px;overflow: hidden">
+      <div style="float: right;">
+        <Page
+          :total="100"
+          :current="1"
+          @on-change="changePage"
+          :page-size-opts="pageSize"
+          show-sizer
+          show-elevator
+          show-total
+          prev-text="Previous"
+          next-text="Next"
+        ></Page>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      columns1: [
+      tableData1: this.mockTableData1(),
+      pageSize: [10, 20, 30, 60],
+      tableColumns1: [
         {
-          title: '姓名',
+          title: 'Name',
           key: 'name',
         },
         {
-          title: '年龄',
-          key: 'age',
+          title: 'Status',
+          key: 'status',
+          render: (h, params) => {
+            const row = params.row;
+            const color =
+              row.status === 1
+                ? 'primary'
+                : row.status === 2
+                ? 'success'
+                : 'error';
+            const text =
+              row.status === 1
+                ? 'Working'
+                : row.status === 2
+                ? 'Success'
+                : 'Fail';
+
+            return h(
+              'Tag',
+              {
+                props: {
+                  type: 'dot',
+                  color: color,
+                },
+              },
+              text,
+            );
+          },
         },
         {
-          title: '地址',
-          key: 'address',
+          title: 'Portrayal',
+          key: 'portrayal',
+          render: (h, params) => {
+            return h(
+              'Poptip',
+              {
+                props: {
+                  trigger: 'hover',
+                  title: params.row.portrayal.length + 'portrayals',
+                  placement: 'bottom',
+                },
+              },
+              [
+                h('Tag', params.row.portrayal.length),
+                h(
+                  'div',
+                  {
+                    slot: 'content',
+                  },
+                  [
+                    h(
+                      'ul',
+                      this.tableData1[params.index].portrayal.map(item => {
+                        return h(
+                          'li',
+                          {
+                            style: {
+                              textAlign: 'center',
+                              padding: '4px',
+                            },
+                          },
+                          item,
+                        );
+                      }),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
         },
-      ],
-      data1: [
         {
-          name: '王小明',
-          age: 18,
-          address: '北京市朝阳区芍药居',
+          title: 'People',
+          key: 'people',
+          render: (h, params) => {
+            return h(
+              'Poptip',
+              {
+                props: {
+                  trigger: 'hover',
+                  title: params.row.people.length + 'customers',
+                  placement: 'bottom',
+                },
+              },
+              [
+                h('Tag', params.row.people.length),
+                h(
+                  'div',
+                  {
+                    slot: 'content',
+                  },
+                  [
+                    h(
+                      'ul',
+                      this.tableData1[params.index].people.map(item => {
+                        return h(
+                          'li',
+                          {
+                            style: {
+                              textAlign: 'center',
+                              padding: '4px',
+                            },
+                          },
+                          item.n + '：' + item.c + 'People',
+                        );
+                      }),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
         },
         {
-          name: '张小刚',
-          age: 25,
-          address: '北京市海淀区西二旗',
+          title: 'Sampling Time',
+          key: 'time',
+          render: (h, params) => {
+            return h('div', 'Almost' + params.row.time + 'days');
+          },
         },
         {
-          name: '李小红',
-          age: 30,
-          address: '上海市浦东新区世纪大道',
-        },
-        {
-          name: '周小伟',
-          age: 26,
-          address: '深圳市南山区深南大道',
+          title: 'Updated Time',
+          key: 'update',
+          render: (h, params) => {
+            return h(
+              'div',
+              this.formatDate(this.tableData1[params.index].update),
+            );
+          },
         },
       ],
     };
+  },
+  methods: {
+    mockTableData1() {
+      let data = [];
+      for (let i = 0; i < 10; i++) {
+        data.push({
+          name: 'Business' + Math.floor(Math.random() * 100 + 1),
+          status: Math.floor(Math.random() * 3 + 1),
+          portrayal: ['City', 'People', 'Cost', 'Life', 'Entertainment'],
+          people: [
+            {
+              n: 'People' + Math.floor(Math.random() * 100 + 1),
+              c: Math.floor(Math.random() * 1000000 + 100000),
+            },
+            {
+              n: 'People' + Math.floor(Math.random() * 100 + 1),
+              c: Math.floor(Math.random() * 1000000 + 100000),
+            },
+            {
+              n: 'People' + Math.floor(Math.random() * 100 + 1),
+              c: Math.floor(Math.random() * 1000000 + 100000),
+            },
+          ],
+          time: Math.floor(Math.random() * 7 + 1),
+          update: new Date(),
+        });
+      }
+      return data;
+    },
+    formatDate(date) {
+      const y = date.getFullYear();
+      let m = date.getMonth() + 1;
+      m = m < 10 ? '0' + m : m;
+      let d = date.getDate();
+      d = d < 10 ? '0' + d : d;
+      return y + '-' + m + '-' + d;
+    },
+    changePage() {
+      // The simulated data is changed directly here, and the actual usage scenario should fetch the data from the server
+      this.tableData1 = this.mockTableData1();
+    },
   },
 };
 </script>
