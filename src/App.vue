@@ -26,6 +26,14 @@
             </Menu-item>
           </router-link>
 
+
+          <router-link to='/vueOrder'>
+            <Menu-item name="4">
+              <Icon type="ios-analytics" :size="iconSize"></Icon>
+              <span class="layout-text">vueOrder</span>
+            </Menu-item>
+          </router-link>
+
         </Menu>
       </i-col>
       <i-col :span="spanRight">

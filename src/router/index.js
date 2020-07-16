@@ -1,28 +1,34 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Forms from '@/pages/Form/form'
-import TestVuex from '../pages/testVuex/index'
+import Vue from 'vue';
+import Router from 'vue-router';
+import HelloWorld from '@/components/HelloWorld';
+import Forms from '@/pages/Form/form';
+import TestVuex from '../pages/testVuex/index';
+import VueOrder from '@/pages/vueOrder/index';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
-    {path:'/',redirect:'/index'},
+    { path: '/', redirect: '/index' },
     {
       path: '/index',
       name: 'HelloWorld',
-      component: HelloWorld
+      component: HelloWorld,
     },
     {
       path: '/form',
       name: 'form',
-      component: Forms
+      component: Forms,
     },
     {
       path: '/testVuex',
       name: 'testVuex',
-      component: TestVuex
+      component: TestVuex,
     },
-  ]
-})
+    {
+      path: '/vueOrder',
+      name: 'vueOrder',
+      component: VueOrder,
+    },
+  ],
+});
