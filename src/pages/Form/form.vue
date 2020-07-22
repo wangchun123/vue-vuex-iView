@@ -8,6 +8,18 @@
 </template>
 <script>
 import SearchForm from '../../components/searchForm/index';
+import { validateAuthcode } from '../../util/validate';
+
+//支持promise校验
+const some = (rule, value) => {
+  return new Promise((resolve, reject) => {
+    if (value < 18) {
+      reject('too young'); // reject with error message
+    } else {
+      resolve();
+    }
+  });
+};
 
 export default {
   components: {
@@ -21,16 +33,22 @@ export default {
         name2: '11111111',
         name3: '111111',
         name4: '1',
-        name5: [1,2],
+        name5: [1, 2],
         name6: true,
         name7: [10, 20],
         name8: 'asadasdasd',
       },
       formRuleValidate: {
-        name: [
+        name8: [
           {
             required: true,
             message: 'Please fill in the user name',
+            trigger: 'blur',
+          },
+        ],
+        name: [
+          {
+            validator: some,
             trigger: 'blur',
           },
         ],
