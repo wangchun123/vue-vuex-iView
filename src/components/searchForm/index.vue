@@ -4,12 +4,20 @@
       <Col v-for="(item,index) in formSearch" :key="index" v-bind="{...item}">
         <template v-if="item.type==='Input'">
           <Form-item :label="item.label" :prop="item.prop">
-            <Input v-model="formValidate[item.prop]" v-bind="{...item.nodeProps}" />
+            <Input
+              v-model="formValidate[item.prop]"
+              v-bind="{...item.nodeProps}"
+              v-on="{...item.nodeEvents}"
+            />
           </Form-item>
         </template>
         <template v-else-if="item.type==='Select'">
           <Form-item :label="item.label" :prop="item.prop">
-            <Select v-model="formValidate[item.prop]" v-bind="{...item.nodeProps}">
+            <Select
+              v-model="formValidate[item.prop]"
+              v-bind="{...item.nodeProps}"
+              v-on="{...item.nodeEvents}"
+            >
               <Option
                 v-for="(item,index) in item.nodeProps.dataSource"
                 :value="item.value"
@@ -20,17 +28,29 @@
         </template>
         <template v-else-if="item.type==='DatePicker'">
           <Form-item :label="item.label" :prop="item.prop">
-            <DatePicker v-model="formValidate[item.prop]" v-bind="{...item.nodeProps}"></DatePicker>
+            <DatePicker
+              v-model="formValidate[item.prop]"
+              v-bind="{...item.nodeProps}"
+              v-on="{...item.nodeEvents}"
+            ></DatePicker>
           </Form-item>
         </template>
         <template v-else-if="item.type==='TimePicker'">
           <Form-item :label="item.label" :prop="item.prop">
-            <TimePicker v-model="formValidate[item.prop]" v-bind="{...item.nodeProps}"></TimePicker>
+            <TimePicker
+              v-model="formValidate[item.prop]"
+              v-bind="{...item.nodeProps}"
+              v-on="{...item.nodeEvents}"
+            ></TimePicker>
           </Form-item>
         </template>
         <template v-else-if="item.type==='Radio'">
           <Form-item :label="item.label" :prop="item.prop">
-            <RadioGroup v-model="formValidate[item.prop]" v-bind="{...item.nodeProps}">
+            <RadioGroup
+              v-model="formValidate[item.prop]"
+              v-bind="{...item.nodeProps}"
+              v-on="{...item.nodeEvents}"
+            >
               <Radio
                 v-for="(item,index) in item.nodeProps.dataSource"
                 :label="item.value"
@@ -41,7 +61,11 @@
         </template>
         <template v-else-if="item.type==='Checkbox'">
           <Form-item :label="item.label" :prop="item.prop">
-            <CheckboxGroup v-model="formValidate[item.prop]" v-bind="{...item.nodeProps}">
+            <CheckboxGroup
+              v-model="formValidate[item.prop]"
+              v-bind="{...item.nodeProps}"
+              v-on="{...item.nodeEvents}"
+            >
               <Checkbox
                 v-for="(item,index) in item.nodeProps.dataSource"
                 :label="item.value"
@@ -52,7 +76,11 @@
         </template>
         <template v-else-if="item.type==='Switch'">
           <Form-item :label="item.label" :prop="item.prop">
-            <i-switch v-model="formValidate[item.prop]" v-bind="{...item.nodeProps}">
+            <i-switch
+              v-model="formValidate[item.prop]"
+              v-bind="{...item.nodeProps}"
+              v-on="{...item.nodeEvents}"
+            >
               <span slot="open">On</span>
               <span slot="close">Off</span>
             </i-switch>
@@ -60,7 +88,11 @@
         </template>
         <template v-else-if="item.type==='Slider'">
           <Form-item :label="item.label" :prop="item.prop">
-            <Slider v-model="formValidate[item.prop]" v-bind="{...item.nodeProps}"></Slider>
+            <Slider
+              v-model="formValidate[item.prop]"
+              v-bind="{...item.nodeProps}"
+              v-on="{...item.nodeEvents}"
+            ></Slider>
           </Form-item>
         </template>
       </Col>

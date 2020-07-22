@@ -62,6 +62,11 @@ export default {
           nodeProps: {
             placeholder: '12321',
           },
+          nodeEvents: {
+            'on-change': val => {
+              console.log('val', val.target.value);
+            },
+          },
         },
         {
           span: 24,
