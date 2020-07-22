@@ -3,8 +3,16 @@
     :formValidates="formValidate"
     :ruleValidates="formRuleValidate"
     :formSearch="formSearch"
+    :footerAlign="footerAlign"
     @successSubmit="handleSubmit"
-  ></SearchForm>
+  >
+    <template v-slot:left>
+      <!-- <span>Submit11</span> -->
+    </template>
+    <template v-slot:right>
+      <!-- <span>Reset11</span> -->
+    </template>
+  </SearchForm>
 </template>
 <script>
 import SearchForm from '../../components/searchForm/index';
@@ -27,6 +35,7 @@ export default {
   },
   data() {
     return {
+      footerAlign: 'left',
       formValidate: {
         name: '1',
         name1: '1',

@@ -98,8 +98,18 @@
       </Col>
       <Col span="24" :style="{textAlign:footerAlign}">
         <Form-item>
-          <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
-          <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
+          <Button type="primary" @click="handleSubmit('formValidate')">
+            <span v-if="this.$slots.left">
+              <slot name="left"></slot>
+            </span>
+            <span v-else>Submit</span>
+          </Button>
+          <Button @click="handleReset('formValidate')" style="margin-left: 8px">
+            <span v-if="this.$slots.right">
+              <slot name="right"></slot>
+            </span>
+            <span v-else>Reset</span>
+          </Button>
         </Form-item>
       </Col>
     </Row>
