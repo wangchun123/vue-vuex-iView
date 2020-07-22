@@ -64,7 +64,7 @@
           </Form-item>
         </template>
       </Col>
-      <Col span="24">
+      <Col span="24" :style="{textAlign:footerAlign}">
         <Form-item>
           <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
           <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
@@ -77,16 +77,24 @@
 export default {
   props: {
     formValidates: {
+      //form 控件初始值
       type: Object,
       default: {},
     },
     ruleValidates: {
+      // from 控件的校验
       type: Object,
       default: {},
     },
     formSearch: {
+      //form 需要渲染的控件
       type: Array,
       default: [],
+    },
+    footerAlign: {
+      //底部按钮对齐方式
+      type: '',
+      default: 'left',
     },
   },
   data() {
