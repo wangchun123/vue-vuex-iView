@@ -4,14 +4,14 @@
       <Col :span="item.span" v-for="(item,index) in formSearch" :key="index">
         <template v-if="item.type==='Input'">
           <Form-item :label="item.label" :prop="item.prop">
-            <Input v-model="formValidate[item.prop]" :placeholder="item.placeholder" />
+            <Input v-model="formValidate[item.prop]" v-bind="{...item.nodeProps}" />
           </Form-item>
         </template>
         <template v-else-if="item.type==='Select'">
           <Form-item :label="item.label" :prop="item.prop">
-            <Select v-model="formValidate[item.prop]" :placeholder="item.placeholder">
+            <Select v-model="formValidate[item.prop]" v-bind="{...item.nodeProps}">
               <Option
-                v-for="(item,index) in item.dataSocue"
+                v-for="(item,index) in item.nodeProps.dataSource"
                 :value="item.value"
                 :key="index"
               >{{item.label}}</Option>
@@ -20,11 +20,11 @@
         </template>
         <template v-else-if="item.type==='DatePicker'">
           <Form-item :label="item.label" :prop="item.prop">
-            <DatePicker v-model="formValidate[item.prop]" :placeholder="item.placeholder"></DatePicker>
+            <DatePicker v-model="formValidate[item.prop]" v-bind="{...item.nodeProps}"></DatePicker>
           </Form-item>
         </template>
       </Col>
-      <Col>
+      <Col span="24">
         <Form-item>
           <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
           <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>

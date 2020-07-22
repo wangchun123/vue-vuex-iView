@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      formValidate: { name: '', name1: '', name2: '' },
+      formValidate: { name: '', name1: '', name2: '', name3: '' },
       formRuleValidate: {
         name: [
           {
@@ -27,20 +27,33 @@ export default {
       },
       formSearch: [
         {
-          span: 8,
-          placeholder: 12321,
+          span: 24,
           label: 'qw:',
           type: 'Input',
           prop: 'name',
+          nodeProps: {
+            placeholder: '12321',
+          },
         },
         {
           span: 8,
           label: 'df:',
           type: 'Select',
-          dataSocue: [{ label: '你好', value: 1 }],
           prop: 'name1',
+          nodeProps: {
+            dataSource: [{ label: '你好', value: 1 }],
+          },
         },
         { span: 8, label: 'df:', type: 'DatePicker', prop: 'name2' },
+        {
+          span: 24,
+          label: 'df:',
+          type: 'DatePicker',
+          prop: 'name3',
+          nodeProps: {
+            confirm: true,
+          },
+        },
       ],
     };
   },
