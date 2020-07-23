@@ -21,6 +21,7 @@ export default {
       pageTotal: 100,
       tableProps: {
         border: true,
+        loading: false,
         columns: [
           {
             title: 'Name',
@@ -69,7 +70,7 @@ export default {
                       },
                     },
                   },
-                  'View',
+                  '删除',
                 ),
                 h(
                   'Button',
@@ -79,7 +80,7 @@ export default {
                       size: 'small',
                     },
                   },
-                  'Edit',
+                  '编辑',
                 ),
               ]);
             },
@@ -130,6 +131,10 @@ export default {
     searchTableList(val) {
       this.relodParam = val;
 
+      this.tableProps.loading = true;
+      setTimeout(() => {
+        this.tableProps.loading = false;
+      }, 1000);
       console.log('异步请求', val);
     },
     handelDelete(val) {
