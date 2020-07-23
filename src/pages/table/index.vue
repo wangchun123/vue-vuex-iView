@@ -88,11 +88,12 @@ export default {
         data: tableData,
       },
       formProps: {
-        formValidates: { name: 1123 },
+        formValidates: { name: 1123, name1: '1' },
         footerAlign: 'right',
         formSearch: [
           {
             span: 8,
+            'label-width': 60,
             label: '国际:',
             type: 'Input',
             prop: 'name',
@@ -107,11 +108,13 @@ export default {
           },
           {
             span: 8,
+            'label-width': 60,
             label: '区号:',
-            type: 'Input',
-            prop: 'name',
+            type: 'Select',
+            prop: 'name1',
             nodeProps: {
               placeholder: '',
+              dataSource: [{ label: '你好', value: '1' }],
             },
             nodeEvents: {
               'on-change': val => {
