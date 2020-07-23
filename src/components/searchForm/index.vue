@@ -1,5 +1,5 @@
 <template>
-  <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+  <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="60">
     <Row type="flex">
       <Col v-for="(item,index) in formSearch" :key="index" v-bind="{...item}">
         <template v-if="item.type==='Input'">
@@ -121,22 +121,22 @@ export default {
     formValidates: {
       //form 控件初始值
       type: Object,
-      default: {},
+      default: () => {},
     },
     ruleValidates: {
       // from 控件的校验
       type: Object,
-      default: {},
+      default: () => {},
     },
     formSearch: {
       //form 需要渲染的控件
       type: Array,
-      default: [],
+      default: () => [],
     },
     footerAlign: {
       //底部按钮对齐方式
-      type: '',
-      default: 'left',
+      type: String,
+      default: () => 'left',
     },
   },
   data() {

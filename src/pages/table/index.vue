@@ -1,72 +1,140 @@
 <template>
-    <Table border :columns="columns12" :data="data6">
-        <template slot-scope="{ row }" slot="name">
-            <strong>{{ row.name }}</strong>
-        </template>
-        <template slot-scope="{ row, index }" slot="action">
-            <Button type="primary" size="small" style="margin-right: 5px" @click="show(index)">View</Button>
-            <Button type="error" size="small" @click="remove(index)">Delete</Button>
-        </template>
-    </Table>
+  <SearchTable :tableProps="tableProps" :formProps="formProps" @ajaxHear="ajaxHear"></SearchTable>
 </template>
 <script>
-    export default {
-        data () {
-            return {
-                columns12: [
-                    {
-                        title: 'Name',
-                        slot: 'name'
+import SearchTable from '../../components/searchTable';
+import { tableData } from '../../util/const';
+
+export default {
+  components: {
+    SearchTable,
+  },
+  data() {
+    return {
+      relodParam: {},
+      tableProps: {
+        border: true,
+        columns: [
+          {
+            title: 'Name',
+            key: 'name',
+          },
+          {
+            title: 'Age',
+            key: 'age',
+          },
+          {
+            title: 'Province',
+            key: 'province',
+          },
+          {
+            title: 'City',
+            key: 'city',
+          },
+          {
+            title: 'Address',
+            key: 'address',
+          },
+          {
+            title: 'Postcode',
+            key: 'zip',
+          },
+          {
+            title: 'Action',
+            key: 'action',
+
+            render: (h, params) => {
+              const {
+                row: { id },
+              } = params;
+
+              return h('div', [
+                h(
+                  'Button',
+                  {
+                    props: {
+                      type: 'text',
+                      size: 'small',
                     },
-                    {
-                        title: 'Age',
-                        key: 'age'
+                    on: {
+                      click: () => {
+                        this.handelDelete(id);
+                      },
                     },
-                    {
-                        title: 'Address',
-                        key: 'address'
+                  },
+                  'View',
+                ),
+                h(
+                  'Button',
+                  {
+                    props: {
+                      type: 'text',
+                      size: 'small',
                     },
-                    {
-                        title: 'Action',
-                        slot: 'action',
-                        width: 150,
-                        align: 'center'
-                    }
-                ],
-                data6: [
-                    {
-                        name: 'John Brown',
-                        age: 18,
-                        address: 'New York No. 1 Lake Park'
-                    },
-                    {
-                        name: 'Jim Green',
-                        age: 24,
-                        address: 'London No. 1 Lake Park'
-                    },
-                    {
-                        name: 'Joe Black',
-                        age: 30,
-                        address: 'Sydney No. 1 Lake Park'
-                    },
-                    {
-                        name: 'Jon Snow',
-                        age: 26,
-                        address: 'Ottawa No. 2 Lake Park'
-                    }
-                ]
-            }
-        },
-        methods: {
-            show (index) {
-                this.$Modal.info({
-                    title: 'User Info',
-                    content: `Name：${this.data6[index].name}<br>Age：${this.data6[index].age}<br>Address：${this.data6[index].address}`
-                })
+                  },
+                  'Edit',
+                ),
+              ]);
             },
-            remove (index) {
-                this.data6.splice(index, 1);
-            }
-        }
-    }
+          },
+        ],
+        data: tableData,
+      },
+      formProps: {
+        formValidates: { name: 1123 },
+        formSearch: [
+          {
+            span: 8,
+            label: '国际:',
+            type: 'Input',
+            prop: 'name',
+            nodeProps: {
+              placeholder: '',
+            },
+            nodeEvents: {
+              'on-change': val => {
+                console.log('val', val.target.value);
+              },
+            },
+          },
+          {
+            span: 8,
+            label: '区号:',
+            type: 'Input',
+            prop: 'name',
+            nodeProps: {
+              placeholder: '',
+            },
+            nodeEvents: {
+              'on-change': val => {
+                console.log('val', val.target.value);
+              },
+            },
+          },
+        ],
+      },
+    };
+  },
+  methods: {
+    ajaxHear(val) {
+      this.relodParam = val;
+
+      console.log('异步请求', val);
+    },
+    handelDelete(val) {
+      console.log(val);
+      this.ajaxHear(this.relodParam);
+    },
+  },
+  mounted() {
+    const param = {
+      current: 1,
+      pageSize: 10,
+      ...this.formProps.formValidates,
+    };
+    this.ajaxHear(param);
+  },
+};
 </script>
+<style>
+</style>
