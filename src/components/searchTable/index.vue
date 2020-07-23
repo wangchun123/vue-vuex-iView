@@ -1,7 +1,7 @@
 <template>
   <div>
     <SearchForm v-bind="formProps" v-show="isShowForm" @successSubmit="handleSubmit"></SearchForm>
-    <Table v-bind="tableProps"></Table>
+    <Table v-bind="tableProps" v-on="tableProps.tableEvent"></Table>
     <Row>
       <Col :style="{textAlign:pageNationAlign,marginTop:'10px'}">
         <Page

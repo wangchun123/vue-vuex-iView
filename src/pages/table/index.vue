@@ -26,6 +26,7 @@ export default {
           {
             title: 'Name',
             key: 'name',
+            type: 'selection'
           },
           {
             title: 'Age',
@@ -87,6 +88,11 @@ export default {
           },
         ],
         data: tableData,
+        tableEvent: {
+          'on-row-click': (val, index) => {
+            console.log('点击table每一行', val, index);
+          },
+        },
       },
       formProps: {
         formValidates: { name: 1123, name1: '1' },
