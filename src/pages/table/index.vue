@@ -1,5 +1,11 @@
 <template>
-  <SearchTable :tableProps="tableProps" :formProps="formProps" @ajaxHear="ajaxHear"></SearchTable>
+  <SearchTable
+    :tableProps="tableProps"
+    :formProps="formProps"
+    @searchTableList="searchTableList"
+    :isShowForm="true"
+    :pageTotal="pageTotal"
+  ></SearchTable>
 </template>
 <script>
 import SearchTable from '../../components/searchTable';
@@ -12,6 +18,7 @@ export default {
   data() {
     return {
       relodParam: {},
+      pageTotal: 100,
       tableProps: {
         border: true,
         columns: [
@@ -82,6 +89,7 @@ export default {
       },
       formProps: {
         formValidates: { name: 1123 },
+        footerAlign: 'right',
         formSearch: [
           {
             span: 8,
@@ -116,14 +124,14 @@ export default {
     };
   },
   methods: {
-    ajaxHear(val) {
+    searchTableList(val) {
       this.relodParam = val;
 
       console.log('异步请求', val);
     },
     handelDelete(val) {
       console.log(val);
-      this.ajaxHear(this.relodParam);
+      this.searchTableList(this.relodParam);
     },
   },
   mounted() {
@@ -132,7 +140,7 @@ export default {
       pageSize: 10,
       ...this.formProps.formValidates,
     };
-    this.ajaxHear(param);
+    this.searchTableList(param);
   },
 };
 </script>

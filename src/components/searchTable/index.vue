@@ -57,15 +57,15 @@ export default {
   methods: {
     handleSubmit(val) {
       Object.assign(this.param, val);
-      this.$emit('ajaxHear', this.param);
+      this.$emit('searchTableList', this.param);
     },
     pageChange(val) {
       Object.assign(this.param, { current: val });
-      this.$emit('ajaxHear', this.param);
+      this.$emit('searchTableList', this.param);
     },
     pageSizeChange(val) {
       Object.assign(this.param, { current: 1, pageSize: val });
-      this.$emit('ajaxHear', this.param);
+      this.$emit('searchTableList', this.param);
     },
   },
 };
