@@ -12,34 +12,6 @@
               <span class="layout-text">{{item.title}}</span>
             </Menu-item>
           </router-link>
-
-          <!-- <router-link to="/form">
-            <Menu-item name="1">
-              <Icon type="ios-navigate" :size="iconSize"></Icon>
-              <span class="layout-text">form</span>
-            </Menu-item>
-          </router-link>
-
-          <router-link to="/index">
-            <Menu-item name="2">
-              <Icon type="ios-keypad" :size="iconSize"></Icon>
-              <span class="layout-text">首页</span>
-            </Menu-item>
-          </router-link>
-
-          <router-link to="/testVuex">
-            <Menu-item name="3">
-              <Icon type="ios-analytics" :size="iconSize"></Icon>
-              <span class="layout-text">vuex</span>
-            </Menu-item>
-          </router-link>
-
-          <router-link to="/vueOrder">
-            <Menu-item name="4">
-              <Icon type="ios-analytics" :size="iconSize"></Icon>
-              <span class="layout-text">vueOrder</span>
-            </Menu-item>
-          </router-link>-->
         </Menu>
       </i-col>
       <i-col :span="spanRight">

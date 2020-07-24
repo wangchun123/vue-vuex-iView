@@ -3,7 +3,7 @@
     <SearchForm v-bind="formProps" v-show="isShowForm" @successSubmit="handleSubmit"></SearchForm>
     <Table v-bind="tableProps" v-on="tableProps.tableEvent"></Table>
     <Row>
-      <Col :style="{textAlign:pageNationAlign,marginTop:'10px'}">
+      <i-col :style="{textAlign:pageNationAlign,marginTop:'10px'}">
         <Page
           :total="pageTotal"
           show-total
@@ -12,7 +12,7 @@
           @on-change="pageChange"
           @on-page-size-change="pageSizeChange"
         />
-      </Col>
+      </i-col>
     </Row>
   </div>
 </template>

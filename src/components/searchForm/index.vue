@@ -1,7 +1,7 @@
 <template>
   <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
     <Row type="flex">
-      <Col v-for="(item,index) in formSearch" :key="index" v-bind="{...item}">
+      <i-col v-for="(item,index) in formSearch" :key="index" v-bind="{...item}">
         <template v-if="item.type==='Input'">
           <Form-item v-bind="{...item}">
             <Input
@@ -95,8 +95,8 @@
             ></Slider>
           </Form-item>
         </template>
-      </Col>
-      <Col span="24" :style="{textAlign:footerAlign}">
+      </i-col>
+      <i-col span="24" :style="{textAlign:footerAlign}">
         <Form-item :label-width="0">
           <Button type="primary" @click="handleSubmit('formValidate')">
             <span v-if="this.$slots.left">
@@ -111,7 +111,7 @@
             <span v-else>Reset</span>
           </Button>
         </Form-item>
-      </Col>
+      </i-col>
     </Row>
   </Form>
 </template>
