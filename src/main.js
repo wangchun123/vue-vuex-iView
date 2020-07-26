@@ -6,6 +6,8 @@ import router from './router';
 import iview from 'iview';
 import 'iview/dist/styles/iview.css';
 import store from './vuex/store';
+import BaiduMap from 'vue-baidu-map-v3';
+Vue.use(BaiduMap, { ak: 'LwTt2vqPzSWaH6PIdu5myCho6uaBqvdI' });
 
 Vue.use(iview, {
   //全局配置
